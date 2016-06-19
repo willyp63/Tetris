@@ -1,0 +1,166 @@
+// Place all the styles related to the Sessions controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h1, h2, div, ul, li, form, body, input, label, header, figure, figcaption, span {
+  list-style: none;
+
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  color: inherit;
+  font: inherit;
+  text-decoration: inherit;
+
+  background: transparent;
+}
+
+body {
+  font-family: sans-serif;
+  background-color: tan;
+}
+
+header {
+  position: relative;
+}
+
+header span {
+  position: absolute;
+  top: 50%;
+  left: 125px;
+  transform: translateY(-50%);
+  font-size: 20px;
+}
+
+header form.button_to {
+  float: left;
+  margin: 5px;
+  padding: 5px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+header form.button_to:hover {
+  background-color: #ccc;
+}
+
+h1 {
+  margin: 25px;
+  font-size: 64px;
+  font-weight: bold;
+  text-align: center;
+}
+
+div.user-form {
+  width: 450px;
+  margin: 5px auto;
+  padding: 5px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+div.user-form label {
+  margin: 5px 15px;
+  font-size: 20px;
+}
+
+div.user-form input {
+  margin: 5px 15px;
+  padding: 2px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+div.user-form input[type="submit"] {
+  margin: 20px;
+  padding: 5px 15px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+div.user-form input[type="submit"]:hover {
+  background-color: #ccc;
+}
+
+div.user-form ul {
+  padding: 0px 25px;
+  list-style: circle;
+}
+
+div.tetris {
+  width: 696px;
+  margin: auto;
+}
+
+ul.board {
+  float: left;
+  margin-right: 42px;
+  width: 200px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+div.info-pane {
+  float: left;
+  width: 200px;
+  height: 315px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+div.highscores {
+  float: left;
+  margin-right: 42px;
+  width: 200px;
+  height: 315px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+div.highscores li {
+  padding: 15px;
+  text-align: center;
+}
+
+ul.board li, ul.next li, ul.save li {
+  float: left;
+  width: 18px;
+  height: 18px;
+  border: 1px solid black;
+}
+
+ul.next, ul.save {
+  margin: 15px auto;
+  width: 80px;
+  border: 2px solid black;
+  border-radius: 5px;
+  background-color: white;
+}
+
+span {
+  text-align: center;
+  margin: 15px auto;
+  display: block;
+  font-size: 18px;
+}
+
+h2 {
+  text-align: center;
+  margin: 15px auto;
+  font-size: 14px;
+}
+
+
+.cf:after {
+  content: "";
+  display: block;
+  clear: both;
+}

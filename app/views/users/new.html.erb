@@ -1,0 +1,22 @@
+
+<h1>Sign Up</h1>
+
+<div class="user-form">
+  <form action="/users" method="post">
+    <%= csrf_token %>
+
+    <label for="username">Username:</label>
+    <input id="username" type="text" name="user[username]" value="<%= @user.username %>">
+
+    <br><br>
+
+    <label for="password">Password:</label>
+    <input id="password" type="password" name="user[password]" value="<%= @user.password %>">
+
+    <br><br>
+
+    <%= error_messages(@user) %>
+
+    <input type="submit" value="Sign Up">
+  </form>
+</div>

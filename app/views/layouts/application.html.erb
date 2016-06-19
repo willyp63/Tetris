@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Tetris</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<header class="cf">
+<% if current_user %>
+  <span>Logged In As: <%= current_user.username %></span>
+  <%= button_to "Log Out", session_url, method: :delete %>
+<% else %>
+  <%= button_to "Log In", new_session_url, method: :get %>
+  <%= button_to "Sign Up", new_user_url, method: :get %>
+<% end %>
+</header>
+
+<%= yield %>
+
+</body>
+</html>
