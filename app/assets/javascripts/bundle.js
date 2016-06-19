@@ -59,9 +59,9 @@
 /***/ function(module, exports, __webpack_require__) {
 
 	const Tetris = __webpack_require__(2);
-	const Game = __webpack_require__(5);
+	const Game = __webpack_require__(3);
 	
-	const STEP_INTERVAL = 250;
+	const STEP_INTERVAL = 150;
 	
 	function View ($tetris) {
 	  this.$board = $tetris.find(".board");
@@ -215,116 +215,8 @@
 /* 3 */
 /***/ function(module, exports, __webpack_require__) {
 
-	const Tetris = __webpack_require__(2);
-	
-	function Block (grid, color, pos, game) {
-	  this.grid = grid;
-	  this.color = color;
-	  this.pos = pos;
-	  this.game = game;
-	}
-	
-	Block.randomBlock = function (pos, game) {
-	  const i = Math.floor(Math.random() * Tetris.BLOCKS.length);
-	  const grid = Tetris.BLOCKS[i].slice();
-	  const color = Tetris.BLOCK_COLORS[i];
-	  return new Block (grid, color, pos, game);
-	};
-	
-	Block.prototype.occupiedCells = function () {
-	  const cells = [];
-	  for (let i = 0; i < this.grid.length; i++) {
-	    for (let j = 0; j < this.grid[i].length; j++) {
-	      if (this.grid[i][j]) {
-	        cells.push([i + this.pos[0], j + this.pos[1]]);
-	      }
-	    }
-	  }
-	  return cells;
-	};
-	
-	Block.prototype.validPos = function () {
-	  const cells = this.occupiedCells();
-	  for (let i = 0; i < cells.length; i++) {
-	    const y = cells[i][0], x = cells[i][1];
-	    const boardGrid = this.game.board.grid;
-	    if (x < 0 || x >= Tetris.NUM_COLS || y >= Tetris.NUM_ROWS || boardGrid[y][x]){
-	      return false
-	    }
-	  }
-	  return true;
-	}
-	
-	Block.prototype.rotate = function (dir) {
-	  const rotated = [];
-	  for (let i = 0; i < this.grid.length; i++) {
-	    rotated.push([]);
-	    for (let j = 0; j < this.grid.length; j++) {
-	      if (dir) {
-	        rotated[i].push(this.grid[this.grid.length - j - 1][i]);
-	      } else {
-	        rotated[i].push(this.grid[j][this.grid.length - i - 1]);
-	      }
-	    }
-	  }
-	  this.grid = rotated;
-	}
-	
-	module.exports = Block;
-
-
-/***/ },
-/* 4 */
-/***/ function(module, exports, __webpack_require__) {
-
-	const Util = __webpack_require__(6);
-	const Tetris = __webpack_require__(2);
-	
-	function Board (game) {
-	  this.game = game;
-	  this.grid = Util.emptyGrid(Tetris.NUM_ROWS, Tetris.NUM_COLS);
-	}
-	
-	Board.prototype.addBlock = function (block) {
-	  block.occupiedCells().forEach(cell => {
-	    const y = cell[0], x = cell[1];
-	    this.grid[y][x] = block.color;
-	  });
-	};
-	
-	Board.prototype.clearRows = function () {
-	  const rowsToClear = [];
-	  for (let i = 0; i < this.grid.length; i++) {
-	    if (Board.rowCleared(this.grid[i])){
-	      rowsToClear.push(i);
-	    }
-	  }
-	
-	  rowsToClear.forEach(i => {
-	    this.grid.splice(i, 1);
-	    const emptyRow = new Array(Tetris.NUM_COLS).map(n => null);
-	    this.grid.unshift(emptyRow);
-	  });
-	
-	  return rowsToClear.length;
-	};
-	
-	Board.rowCleared = function (row) {
-	  for (let i = 0; i < row.length; i++) {
-	    if (!row[i]) { return false; }
-	  }
-	  return true;
-	};
-	
-	module.exports = Board;
-
-
-/***/ },
-/* 5 */
-/***/ function(module, exports, __webpack_require__) {
-
-	const Block = __webpack_require__(3);
-	const Board = __webpack_require__(4);
+	const Block = __webpack_require__(4);
+	const Board = __webpack_require__(5);
 	const Tetris = __webpack_require__(2);
 	
 	const blockStartPos =  [-1, Math.floor(Tetris.NUM_COLS / 2) - 2];
@@ -440,6 +332,114 @@
 	};
 	
 	module.exports = Game;
+
+
+/***/ },
+/* 4 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const Tetris = __webpack_require__(2);
+	
+	function Block (grid, color, pos, game) {
+	  this.grid = grid;
+	  this.color = color;
+	  this.pos = pos;
+	  this.game = game;
+	}
+	
+	Block.randomBlock = function (pos, game) {
+	  const i = Math.floor(Math.random() * Tetris.BLOCKS.length);
+	  const grid = Tetris.BLOCKS[i].slice();
+	  const color = Tetris.BLOCK_COLORS[i];
+	  return new Block (grid, color, pos, game);
+	};
+	
+	Block.prototype.occupiedCells = function () {
+	  const cells = [];
+	  for (let i = 0; i < this.grid.length; i++) {
+	    for (let j = 0; j < this.grid[i].length; j++) {
+	      if (this.grid[i][j]) {
+	        cells.push([i + this.pos[0], j + this.pos[1]]);
+	      }
+	    }
+	  }
+	  return cells;
+	};
+	
+	Block.prototype.validPos = function () {
+	  const cells = this.occupiedCells();
+	  for (let i = 0; i < cells.length; i++) {
+	    const y = cells[i][0], x = cells[i][1];
+	    const boardGrid = this.game.board.grid;
+	    if (x < 0 || x >= Tetris.NUM_COLS || y >= Tetris.NUM_ROWS || boardGrid[y][x]){
+	      return false
+	    }
+	  }
+	  return true;
+	}
+	
+	Block.prototype.rotate = function (dir) {
+	  const rotated = [];
+	  for (let i = 0; i < this.grid.length; i++) {
+	    rotated.push([]);
+	    for (let j = 0; j < this.grid.length; j++) {
+	      if (dir) {
+	        rotated[i].push(this.grid[this.grid.length - j - 1][i]);
+	      } else {
+	        rotated[i].push(this.grid[j][this.grid.length - i - 1]);
+	      }
+	    }
+	  }
+	  this.grid = rotated;
+	}
+	
+	module.exports = Block;
+
+
+/***/ },
+/* 5 */
+/***/ function(module, exports, __webpack_require__) {
+
+	const Util = __webpack_require__(6);
+	const Tetris = __webpack_require__(2);
+	
+	function Board (game) {
+	  this.game = game;
+	  this.grid = Util.emptyGrid(Tetris.NUM_ROWS, Tetris.NUM_COLS);
+	}
+	
+	Board.prototype.addBlock = function (block) {
+	  block.occupiedCells().forEach(cell => {
+	    const y = cell[0], x = cell[1];
+	    this.grid[y][x] = block.color;
+	  });
+	};
+	
+	Board.prototype.clearRows = function () {
+	  const rowsToClear = [];
+	  for (let i = 0; i < this.grid.length; i++) {
+	    if (Board.rowCleared(this.grid[i])){
+	      rowsToClear.push(i);
+	    }
+	  }
+	
+	  rowsToClear.forEach(i => {
+	    this.grid.splice(i, 1);
+	    const emptyRow = new Array(Tetris.NUM_COLS).map(n => null);
+	    this.grid.unshift(emptyRow);
+	  });
+	
+	  return rowsToClear.length;
+	};
+	
+	Board.rowCleared = function (row) {
+	  for (let i = 0; i < row.length; i++) {
+	    if (!row[i]) { return false; }
+	  }
+	  return true;
+	};
+	
+	module.exports = Board;
 
 
 /***/ },

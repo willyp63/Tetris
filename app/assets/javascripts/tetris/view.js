@@ -1,7 +1,7 @@
 const Tetris = require("./tetris.js");
 const Game = require("./game.js");
 
-const STEP_INTERVAL = 250;
+const STEP_INTERVAL = 150;
 
 function View ($tetris) {
   this.$board = $tetris.find(".board");
